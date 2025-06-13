@@ -127,7 +127,7 @@ button:focus {
 
 /* About Section Photo (arjete.jpeg) */
 .about-photo {
-    float: left; /* Floats the image to the LEFT of the text */
+    float: right; /* Floats the image to the LEFT of the text */
     width: 180px; /* Fixed width */
     height: 180px; /* FIXED HEIGHT = WIDTH for perfect circle */
     border-radius: 50%; /* Makes the image circular */
