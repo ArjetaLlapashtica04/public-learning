@@ -44,11 +44,18 @@
             <small id="note-date-desc" class="sr-only">Pick the date for your note</small>
             <textarea id="note-content" placeholder="Write what you learned today..." rows="5" aria-label="Your daily learning notes"></textarea>
             <button type="button" onclick="saveNote()">Save Note</button>
-            <div id="note-actions" style="display: none; margin-top: 10px;">
+
+            <div id="note-actions">
                 <button type="button" onclick="editNote()">Edit</button>
                 <button type="button" onclick="deleteNote()">Delete</button>
             </div>
             <p id="status" role="status" aria-live="polite"></p>
+
+            <div id="all-notes-display">
+                <h3>Previous Notes</h3>
+                <ul id="notes-list">
+                    </ul>
+            </div>
         </section>
 
         <section id="images" aria-labelledby="images-heading">
