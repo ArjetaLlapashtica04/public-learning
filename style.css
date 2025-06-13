@@ -1,16 +1,20 @@
-/* Your existing styles (body, header, nav, main, section h2, etc.) go here */
+/* General reset and base styles */
+*, *::before, *::after {
+    box-sizing: border-box;
+}
 
 body {
     font-family: 'Inter', Arial, sans-serif;
     margin: 0;
     scroll-behavior: smooth;
     line-height: 1.7;
-    color: #0c1e3d;
-    background-color: #f7f8fa;
+    color: #0c1e3d; /* Main text color */
+    background-color: #f7f8fa; /* Light background color */
 }
 
+/* Header and Navigation */
 header {
-    background: #0c1e3d;
+    background: #0c1e3d; /* Dark blue header background */
     color: white;
     padding: 12px 0;
     position: sticky;
@@ -41,19 +45,21 @@ nav ul li a {
 
 nav ul li a:hover,
 nav ul li a:focus {
-    color: #c6a15a;
+    color: #c6a15a; /* Golden accent on hover/focus */
     outline: none;
 }
 
+/* Main Content Area */
 main {
-    padding: 40px 20px;
-    max-width: 800px;
-    margin: auto;
+    padding: 40px 20px; /* Consistent padding */
+    max-width: 900px; /* Slightly wider main content area */
+    margin: 40px auto; /* Top/bottom margin and auto for horizontal centering */
     background-color: white;
     border-radius: 8px;
     box-shadow: 0 6px 15px rgba(0, 0, 0, 0.05);
 }
 
+/* Sections */
 section {
     margin-bottom: 60px;
 }
@@ -62,11 +68,26 @@ section h2 {
     font-weight: 700;
     font-size: 1.8rem;
     margin-bottom: 20px;
-    border-bottom: 3px solid #c6a15a;
+    border-bottom: 3px solid #c6a15a; /* Golden underline for headings */
     padding-bottom: 6px;
     color: #0c1e3d;
 }
 
+/* Paragraph styling for better readability */
+section p {
+    margin-bottom: 1.2rem; /* More space between paragraphs */
+    font-size: 1.05rem; /* Slightly larger font */
+    line-height: 1.8; /* Increased line height */
+    color: #333; /* Softer text color */
+}
+
+/* Strong/bold text emphasis */
+strong {
+    color: #0c1e3d; /* Use main dark blue for strong text */
+    font-weight: 700;
+}
+
+/* Form elements (textarea, input) */
 textarea,
 input[type="text"],
 input[type="email"],
@@ -78,7 +99,7 @@ input[type="date"] {
     font-size: 1rem;
     border: 1.8px solid #ccc;
     border-radius: 6px;
-    transition: border-color 0.3s ease;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease; /* Added box-shadow to transition */
     font-family: inherit;
 }
 
@@ -91,17 +112,18 @@ input[type="date"]:focus {
     box-shadow: 0 0 6px rgba(12, 30, 61, 0.3);
 }
 
+/* Buttons */
 button {
     margin-top: 16px;
     padding: 12px 30px;
     font-size: 1.1rem;
     cursor: pointer;
-    background-color: #0c1e3d;
+    background-color: #0c1e3d; /* Dark blue button background */
     color: white;
     border: none;
     border-radius: 8px;
     font-weight: 700;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease; /* Added box-shadow to transition */
     font-family: inherit;
     box-shadow: 0 4px 8px rgba(12, 30, 61, 0.3);
 }
@@ -115,7 +137,7 @@ button:focus {
 
 #status {
     margin-top: 10px;
-    color: #2ecc71;
+    color: #2ecc71; /* Green for success messages */
     font-weight: 600;
 }
 
@@ -123,18 +145,16 @@ button:focus {
     margin-bottom: 18px;
 }
 
-/* --- Corrected and Enhanced Image Styling --- */
-
-/* About Section Photo (arjete.jpeg) */
+/* --- About Section Photo (arjete.jpeg) --- */
 .about-photo {
-    float: right; /* Floats the image to the LEFT of the text */
+    float: right; /* Floats the image to the RIGHT of the text */
     width: 180px; /* Fixed width */
     height: 180px; /* FIXED HEIGHT = WIDTH for perfect circle */
     border-radius: 50%; /* Makes the image circular */
     object-fit: cover; /* Ensures the image fills the area without distortion, cropping if necessary */
     border: 4px solid #c6a15a; /* Using your golden accent color for the border */
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15); /* Slightly stronger shadow */
-    margin: 0 25px 15px 0; /* Margin for spacing: top 0, right 25px (space to text), bottom 15px, left 0 */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15); /* Subtle shadow */
+    margin: 0 0 15px 25px; /* Margin: top 0, right 0, bottom 15px, LEFT 25px (space to text) */
     display: block; /* Ensure it behaves as a block element */
 }
 
@@ -145,49 +165,57 @@ button:focus {
     clear: both; /* Clears floats on both sides */
 }
 
-/* Image Gallery (screenshots) */
+/* --- Image Gallery (screenshots) --- */
 .image-gallery {
-    display: grid; /* Changed from flex to grid for more predictable layout */
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Responsive grid for 250px min width */
-    gap: 20px; /* Space between images */
-    margin-top: 20px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Adjusted minmax for slightly larger cards */
+    gap: 25px; /* Increased gap between images */
+    margin-top: 30px; /* More space below heading */
     justify-items: center; /* Center items within their grid cells */
 }
 
 .image-gallery img {
-    width: 100%; /* Make images fill their grid column */
-    height: 200px; /* Fixed height for consistency in grid */
-    object-fit: cover; /* Crop to fit, maintain aspect ratio */
-    border-radius: 8px; /* Rounded corners for images */
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); /* More pronounced shadow for gallery images */
-    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth hover effect */
+    width: 100%;
+    height: 200px; /* Consistent height for gallery images */
+    object-fit: cover;
+    border-radius: 8px;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15); /* More pronounced shadow */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .image-gallery img:hover {
-    transform: scale(1.03); /* Slightly enlarge on hover */
-    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2); /* Enhance shadow on hover */
+    transform: scale(1.03);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
 }
 
 
 /* --- Responsive Adjustments --- */
-@media (max-width: 600px) {
-    /* Main content padding adjustment for smaller screens */
+@media (max-width: 768px) {
     main {
-        padding: 20px 15px;
+        padding: 30px 15px; /* Adjust main padding on medium screens */
+        margin: 20px auto; /* Reduce top margin on smaller screens */
     }
 
-    /* Navbar adjustment for smaller screens */
+    section h2 {
+        font-size: 1.6rem;
+    }
+
+    section p {
+        font-size: 1rem;
+        line-height: 1.7;
+    }
+
     nav ul {
-        flex-direction: column; /* Stack navigation items vertically */
-        gap: 10px; /* Space between stacked items */
+        flex-direction: column;
+        gap: 10px;
     }
 
     nav ul li {
-        margin: 0; /* Remove horizontal margin */
+        margin: 0;
     }
 
     nav ul li a {
-        padding: 8px 0; /* Adjust padding for stacked links */
+        padding: 8px 0;
     }
 
     /* About section photo adjustment for smaller screens */
@@ -198,8 +226,24 @@ button:focus {
         height: 150px; /* Ensure equal height for perfect circle */
     }
 
-    /* Image gallery adjustment for smaller screens (already handled by grid effectively) */
+    /* Image gallery adjustment for smaller screens */
     .image-gallery {
         grid-template-columns: 1fr; /* Stack images vertically on small screens */
+        gap: 15px; /* Reduce gap on small screens */
+    }
+}
+
+@media (max-width: 480px) {
+    main {
+        padding: 20px 10px; /* Even tighter padding on very small screens */
+    }
+
+    section h2 {
+        font-size: 1.4rem;
+    }
+
+    button {
+        padding: 10px 20px;
+        font-size: 1rem;
     }
 }
