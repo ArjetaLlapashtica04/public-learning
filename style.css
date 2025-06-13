@@ -168,10 +168,10 @@ button:focus {
 /* --- Image Gallery (screenshots) --- */
 .image-gallery {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Adjusted minmax for slightly larger cards */
-    gap: 25px; /* Increased gap between images */
-    margin-top: 30px; /* More space below heading */
-    justify-items: center; /* Center items within their grid cells */
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 25px;
+    margin-top: 30px;
+    justify-items: center;
 }
 
 .image-gallery img {
@@ -179,7 +179,7 @@ button:focus {
     height: 200px; /* Consistent height for gallery images */
     object-fit: cover;
     border-radius: 8px;
-    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15); /* More pronounced shadow */
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
@@ -188,12 +188,124 @@ button:focus {
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
 }
 
+/* Styles for the "Previous Notes" section */
+#all-notes-display {
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 1px dashed #ccc;
+}
+
+#all-notes-display h3 {
+    font-size: 1.5rem;
+    color: #0c1e3d;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+#notes-list {
+    list-style: none;
+    padding: 0;
+}
+
+/* Styles for each dropdown note item */
+#notes-list li {
+    background-color: #f9f9f9;
+    border: 1px solid #eee;
+    border-radius: 6px;
+    margin-bottom: 15px;
+    overflow: hidden; /* Ensures content is clipped when collapsed */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+.note-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    background-color: #0c1e3d; /* Dark blue background for header */
+    color: white;
+    cursor: pointer;
+    font-weight: 700;
+    font-size: 1.1em;
+    border-radius: 6px 6px 0 0; /* Rounded top corners */
+    transition: background-color 0.3s ease;
+}
+
+.note-header:hover {
+    background-color: #0a1a34;
+}
+
+.note-header .arrow {
+    transition: transform 0.3s ease;
+    font-size: 1.2em;
+    margin-left: 10px;
+}
+
+.note-header.active .arrow {
+    transform: rotate(90deg); /* Rotate arrow when active */
+}
+
+.note-content-body {
+    background-color: white;
+    padding: 0 15px; /* Initial padding, content will adjust */
+    max-height: 0; /* Hidden by default */
+    overflow: hidden;
+    transition: max-height 0.4s ease-out, padding 0.4s ease-out; /* Smooth transition for expand/collapse */
+}
+
+.note-content-body.show {
+    max-height: 500px; /* Adjust as needed, sufficiently large to show content */
+    padding: 15px;
+}
+
+.note-content-text {
+    margin-bottom: 15px;
+    white-space: pre-wrap; /* Preserve whitespace and line breaks */
+    word-wrap: break-word; /* Break long words */
+    color: #333;
+}
+
+.note-item-actions {
+    margin-top: 10px;
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+    padding-bottom: 10px; /* Padding inside the expanded section */
+}
+
+.note-item-actions button {
+    padding: 8px 15px;
+    font-size: 0.9em;
+    margin-top: 0;
+    border-radius: 5px;
+    box-shadow: none; /* Override general button shadow */
+}
+
+.note-item-actions .edit-note-btn {
+    background-color: #007bff;
+}
+.note-item-actions .edit-note-btn:hover {
+    background-color: #0056b3;
+}
+
+.note-item-actions .delete-note-btn {
+    background-color: #dc3545;
+}
+.note-item-actions .delete-note-btn:hover {
+    background-color: #c82333;
+}
+
+/* Hide the default edit/delete buttons from HTML now that JS adds them */
+#note-actions {
+    display: none !important;
+}
+
 
 /* --- Responsive Adjustments --- */
 @media (max-width: 768px) {
     main {
-        padding: 30px 15px; /* Adjust main padding on medium screens */
-        margin: 20px auto; /* Reduce top margin on smaller screens */
+        padding: 30px 15px;
+        margin: 20px auto;
     }
 
     section h2 {
@@ -220,22 +332,22 @@ button:focus {
 
     /* About section photo adjustment for smaller screens */
     .about-photo {
-        float: none; /* Remove float */
-        margin: 0 auto 20px auto; /* Center horizontally, add bottom margin */
-        width: 150px; /* Smaller size for mobile, maintain circle */
-        height: 150px; /* Ensure equal height for perfect circle */
+        float: none;
+        margin: 0 auto 20px auto;
+        width: 150px;
+        height: 150px;
     }
 
     /* Image gallery adjustment for smaller screens */
     .image-gallery {
-        grid-template-columns: 1fr; /* Stack images vertically on small screens */
-        gap: 15px; /* Reduce gap on small screens */
+        grid-template-columns: 1fr;
+        gap: 15px;
     }
 }
 
 @media (max-width: 480px) {
     main {
-        padding: 20px 10px; /* Even tighter padding on very small screens */
+        padding: 20px 10px;
     }
 
     section h2 {
