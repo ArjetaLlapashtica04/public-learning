@@ -16,10 +16,10 @@ body {
 header {
     background: #0c1e3d; /* Dark blue header background */
     color: white;
-    /* Removed sticky position for mobile, it will be added back for desktop */
-    padding: 12px 0; /* Default padding for desktop */
+    padding: 5px 0; /* Adjusted for desktop: Reduced vertical padding */
     z-index: 1000;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    /* position: sticky and top: 0 are removed here for desktop as requested */
 }
 
 nav {
@@ -30,11 +30,11 @@ nav {
     padding: 0 20px;
     max-width: 900px;
     margin: 0 auto;
-    min-height: 60px; /* Adjusted for better vertical centering on desktop */
+    min-height: 45px; /* Adjusted for desktop: Reduced min-height */
 }
 
 nav ul {
-    display: flex;
+    display: flex; /* Default: flex for desktop */
     justify-content: center;
     list-style: none;
     margin: 0;
@@ -336,13 +336,14 @@ button:focus {
 
 
 /* --- Responsive Adjustments --- */
-@media (min-width: 769px) { /* Apply sticky header only on desktop */
-    header {
-        position: sticky;
-        top: 0;
-    }
-}
-
+/* Sticky header is now removed entirely for desktop as requested
+   @media (min-width: 769px) {
+       header {
+           position: sticky;
+           top: 0;
+       }
+   }
+*/
 
 @media (max-width: 768px) {
     /* Mobile header/nav adjustments */
