@@ -343,8 +343,7 @@ button:focus {
     }
 
     nav ul {
-        /* Hide menu by default on mobile */
-        display: none; 
+        /* Mobile menu initial hidden state, allowing transitions */
         flex-direction: column;
         position: absolute;
         top: 100%; /* Position below the header */
@@ -354,17 +353,21 @@ button:focus {
         box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
         padding: 20px 0;
         z-index: 999; /* Below the hamburger, above main content */
+        
+        /* THE KEY CHANGES ARE HERE: */
         opacity: 0;
         visibility: hidden;
-        transform: translateY(-20px);
-        transition: opacity 0.3s ease-out, transform 0.3s ease-out, visibility 0.3s ease-out;
+        max-height: 0; /* Use max-height for collapse effect */
+        overflow: hidden; /* Hide overflow when collapsed */
+        transition: opacity 0.3s ease-out, visibility 0.3s ease-out, max-height 0.4s ease-out; /* Smooth transitions */
     }
 
     nav ul.active { /* Class added by JS when menu is open */
-        display: flex; /* Show menu */
+        /* Show menu */
         opacity: 1;
         visibility: visible;
-        transform: translateY(0);
+        max-height: 300px; /* A sufficient height for your menu items. Adjust if you add many more. */
+        overflow-y: auto; /* Allow scrolling if menu items exceed max-height */
     }
 
     nav ul li {
