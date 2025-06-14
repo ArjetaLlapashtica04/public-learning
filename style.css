@@ -23,12 +23,23 @@ header {
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 
+nav {
+    display: flex; /* Make nav a flex container */
+    justify-content: center; /* Center items horizontally */
+    align-items: center; /* Center items vertically */
+    position: relative; /* Needed for positioning hamburger */
+    padding: 0 20px; /* Add some padding to the nav container */
+    max-width: 900px; /* Constrain width similar to main */
+    margin: 0 auto; /* Center the nav */
+}
+
 nav ul {
-    display: flex;
+    display: flex; /* Default: flex for desktop */
     justify-content: center;
     list-style: none;
     margin: 0;
     padding: 0;
+    width: 100%; /* Take full width on desktop */
 }
 
 nav ul li {
@@ -47,6 +58,27 @@ nav ul li a:hover,
 nav ul li a:focus {
     color: #c6a15a; /* Golden accent on hover/focus */
     outline: none;
+}
+
+/* Hamburger Menu Icon */
+.hamburger-menu {
+    display: none; /* Hidden by default on desktop */
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+    position: absolute; /* Position relative to nav */
+    right: 20px; /* Align to the right */
+    z-index: 1001; /* Ensure it's above other content */
+}
+
+.hamburger-menu .bar {
+    display: block;
+    width: 25px;
+    height: 3px;
+    background-color: white;
+    margin: 5px auto;
+    transition: all 0.3s ease-in-out;
 }
 
 /* Main Content Area */
@@ -249,13 +281,15 @@ button:focus {
     background-color: white;
     padding: 0 15px; /* Initial padding, content will adjust */
     max-height: 0; /* Hidden by default */
-    overflow: hidden;
+    overflow: hidden; /* Hides content when collapsed */
     transition: max-height 0.4s ease-out, padding 0.4s ease-out; /* Smooth transition for expand/collapse */
 }
 
 .note-content-body.show {
     max-height: 500px; /* Adjust as needed, sufficiently large to show content */
     padding: 15px;
+    overflow-y: auto; /* THIS IS THE ADDITION: enables vertical scrolling */
+    -webkit-overflow-scrolling: touch; /* Improves scrolling performance on iOS */
 }
 
 .note-content-text {
@@ -301,8 +335,64 @@ button:focus {
 }
 
 
-/* --- Responsive Adjustments --- */
+/* --- Responsive Adjustments (Mobile Nav Specific) --- */
 @media (max-width: 768px) {
+    nav {
+        justify-content: space-between; /* Space out nav items and hamburger */
+        align-items: center;
+    }
+
+    nav ul {
+        /* Hide menu by default on mobile */
+        display: none; 
+        flex-direction: column;
+        position: absolute;
+        top: 100%; /* Position below the header */
+        left: 0;
+        width: 100%;
+        background-color: #0c1e3d; /* Same as header background */
+        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+        padding: 20px 0;
+        z-index: 999; /* Below the hamburger, above main content */
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(-20px);
+        transition: opacity 0.3s ease-out, transform 0.3s ease-out, visibility 0.3s ease-out;
+    }
+
+    nav ul.active { /* Class added by JS when menu is open */
+        display: flex; /* Show menu */
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+    }
+
+    nav ul li {
+        margin: 10px 0;
+        text-align: center;
+    }
+
+    nav ul li a {
+        padding: 10px 0;
+        display: block; /* Make links full-width clickable */
+    }
+
+    .hamburger-menu {
+        display: block; /* Show hamburger on mobile */
+    }
+    
+    /* Optional: Hamburger animation when active */
+    .hamburger-menu.active .bar:nth-child(1) {
+        transform: translateY(8px) rotate(45deg);
+    }
+    .hamburger-menu.active .bar:nth-child(2) {
+        opacity: 0;
+    }
+    .hamburger-menu.active .bar:nth-child(3) {
+        transform: translateY(-8px) rotate(-45deg);
+    }
+
+    /* General responsive adjustments */
     main {
         padding: 30px 15px;
         margin: 20px auto;
@@ -315,19 +405,6 @@ button:focus {
     section p {
         font-size: 1rem;
         line-height: 1.7;
-    }
-
-    nav ul {
-        flex-direction: column;
-        gap: 10px;
-    }
-
-    nav ul li {
-        margin: 0;
-    }
-
-    nav ul li a {
-        padding: 8px 0;
     }
 
     /* About section photo adjustment for smaller screens */
