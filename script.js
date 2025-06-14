@@ -94,34 +94,4 @@ function displayAllNotes() {
     });
 }
 
-// Function to handle editing a specific note
-function editNote(dateToEdit) {
-    let notes = JSON.parse(localStorage.getItem('dailyNotes')) || {};
-    if (notes[dateToEdit]) {
-        document.getElementById('note-date').value = dateToEdit;
-        document.getElementById('note-content').value = notes[dateToEdit];
-        document.getElementById('status').textContent = `Editing note for ${dateToEdit}. Modify and Save.`;
-        document.getElementById('status').style.color = 'orange';
-
-        // Scroll to the top of the notes section to show the form
-        document.getElementById('notes').scrollIntoView({ behavior: 'smooth' });
-    } else {
-        document.getElementById('status').textContent = 'Note not found for editing.';
-        document.getElementById('status').style.color = 'red';
-    }
-}
-
-// Function to handle deleting a specific note
-function deleteNote(dateToDelete) {
-    if (confirm(`Are you sure you want to delete the note for ${dateToDelete}?`)) {
-        let notes = JSON.parse(localStorage.getItem('dailyNotes')) || {};
-        delete notes[dateToDelete]; // Remove the note from the object
-        localStorage.setItem('dailyNotes', JSON.stringify(notes)); // Save updated object
-        document.getElementById('status').textContent = `Note for ${dateToDelete} deleted!`;
-        document.getElementById('status').style.color = 'green';
-        displayAllNotes(); // Refresh the display
-    }
-}
-
-// Load notes when the page loads
-document.addEventListener('DOMContentLoaded', displayAllNotes);
+// Function to handle editing a specific no
