@@ -48,7 +48,12 @@
 
     <header role="banner">
         <nav role="navigation" aria-label="Main navigation">
-            <ul>
+            <button class="hamburger-menu" aria-label="Toggle navigation">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </button>
+            <ul id="main-nav-list">
                 <li><a href="#about">About</a></li>
                 <li><a href="#notes">Notes</a></li>
                 <li><a href="#images">Gallery</a></li>
@@ -80,7 +85,9 @@
             <input type="date" id="note-date" aria-describedby="note-date-desc" />
             <small id="note-date-desc" class="sr-only">Pick the date for your note</small>
             <textarea id="note-content" placeholder="Write what you learned today..." rows="5" aria-label="Your daily learning notes"></textarea>
-            <button type="button" id="save-note-btn">Save Note</button> <p id="status" role="status" aria-live="polite"></p>
+            <button type="button" id="save-note-btn">Save Note</button> 
+            
+            <p id="status" role="status" aria-live="polite"></p>
 
             <div id="all-notes-display">
                 <h3>Previous Notes</h3>
