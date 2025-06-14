@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>My Public Learning Journey</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="style.css" />
+
+    <script type="module">
+        // Import the functions you need from the SDKs you need
+        // Use the version number (11.9.1) provided by your Firebase console
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-app.js";
+        import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-analytics.js";
+        // *** CRITICAL: You must also import Firestore specific functions ***
+        import { getFirestore, collection, getDocs, doc, setDoc, deleteDoc } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-firestore.js";
+
+        // Your web app's Firebase configuration - Use the EXACT config you provided
+        const firebaseConfig = {
+            apiKey: "AIzaSyA02jTz_G8275yid5bksA1MgbE6vqttvsA",
+            authDomain: "publiclearning-6d2a3.firebaseapp.com",
+            projectId: "publiclearning-6d2a3",
+            storageBucket: "publiclearning-6d2a3.firebasestorage.app",
+            messagingSenderId: "1016170058128",
+            appId: "1:1016170058128:web:7c33c7066ea21a6da3a315",
+            measurementId: "G-PYYNBXL50D"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        // If you plan to use analytics, keep this line. Otherwise, it's optional.
+        const analytics = getAnalytics(app);
+        // Initialize Firestore
+        const db = getFirestore(app);
+
+        // Expose Firebase objects to the global window scope for script.js
+        // This is necessary because script.js is a separate script and not a module itself.
+        window.db = db;
+        window.collection = collection;
+        window.getDocs = getDocs;
+        window.doc = doc;
+        window.setDoc = setDoc;
+        window.deleteDoc = deleteDoc;
+        // If you use analytics in script.js, you might expose it too:
+        // window.analytics = analytics;
+    </script>
+    </head>
+<body>
+
+    <header role="banner">
+        <nav role="navigation" aria-label="Main navigation">
+            <ul>
+                <li><a href="#about">About</a></li>
+                <li><a href="#notes">Notes</a></li>
+                <li><a href="#images">Gallery</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="about" aria-labelledby="about-heading">
+            <h2 id="about-heading">My Learning Journey</h2>
+            <div class="about-text">
+                <img src="./img/arjete.jpeg" alt="Photo of Arjetë Llapashtica" class="about-photo" />
+                <p>Hello and welcome! I’m Arjetë Llapashtica, a final-year Computer Engineering student at UMIB (Universiteti i Mitrovicës “Isa Boletini”). This website is part of my public learning journey.</p>
+
+                <p>As part of a course called Lab Course, which emphasizes project-based teamwork, my team and I developed an interactive web platform named <strong>Kosovo Travel Guide</strong>.</p>
+
+                <p>This platform supports tourists exploring Kosovo by offering a dynamic, user-friendly, and AI-enhanced experience. It integrates real-time data, personalized recommendations, and gamified planning tools to make travel easier and more enjoyable.</p>
+
+                <p>Through this site, I document my personal learning process—detailing what I am building, learning, and improving. It serves as a space to track progress, reflect on challenges, and share insights as I develop skills in frontend and backend development, UX design, and collaborative software engineering.</p>
+
+                <p>Feel free to explore the notes and follow along on my journey!</p>
+            </div>
+        </section>
+
+        <section id="notes" aria-labelledby="notes-heading">
+            <h2 id="notes-heading">Daily Notes</h2>
+            <label for="note-date">Select Date:</label>
+            <input type="date" id="note-date" aria-describedby="note-date-desc" />
+            <small id="note-date-desc" class="sr-only">Pick the date for your note</small>
+            <textarea id="note-content" placeholder="Write what you learned today..." rows="5" aria-label="Your daily learning notes"></textarea>
+            <button type="button" onclick="saveNote()">Save Note</button>
+
+            <div id="note-actions">
+                <button type="button" onclick="editNote()">Edit</button>
+                <button type="button" onclick="deleteNote()">Delete</button>
+            </div>
+            <p id="status" role="status" aria-live="polite"></p>
+
+            <div id="all-notes-display">
+                <h3>Previous Notes</h3>
+                <ul id="notes-list">
+                    </ul>
+            </div>
+        </section>
+
+        <section id="images" aria-labelledby="images-heading">
+            <h2 id="images-heading">Gallery</h2>
+            <div class="image-gallery">
+                <img src="signUp.png" alt="Screenshot of Kosovo Travel Guide app - Sign Up" />
+                <img src="logIn.png" alt="Screenshot of Kosovo Travel Guide app - Log In" />
+                <img src="accommodation.png" alt="Screenshot of Kosovo Travel Guide app - Accommodation" />
+            </div>
+        </section>
+
+        <section id="contact" aria-labelledby="contact-heading">
+            <h2 id="contact-heading">Contact Me</h2>
+            <p>Have questions or just want to say hi? Send me a message below!</p>
+            <form action="https://formspree.io/f/xgvyeklb" method="POST" novalidate>
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" name="name" id="name" placeholder="Your full name" required autocomplete="name" />
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" name="email" id="email" placeholder="your.email@example.com" required autocomplete="email" />
+                </div>
+
+                <div class="form-group">
+                    <label for="message">Message</label>
+                    <textarea name="message" id="message" rows="5" placeholder="Write your message here..." required></textarea>
+                </div>
+
+                <button type="submit" class="btn-primary">Send Message</button>
+            </form>
+        </section>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
