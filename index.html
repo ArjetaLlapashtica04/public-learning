@@ -9,13 +9,12 @@
 
     <script type="module">
         // Import the functions you need from the SDKs you need
-        // Use the version number (11.9.1) provided by your Firebase console
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-app.js";
         import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-analytics.js";
-        // *** CRITICAL: You must also import Firestore specific functions ***
-        import { getFirestore, collection, getDocs, doc, setDoc, deleteDoc } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-firestore.js";
+        // CRITICAL: Import Firestore specific functions
+        import { getFirestore, collection, getDocs, doc, setDoc, deleteDoc, query, orderBy, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-firestore.js";
 
-        // Your web app's Firebase configuration - Use the EXACT config you provided
+        // Your web app's Firebase configuration (copied directly from your Firebase Project Settings)
         const firebaseConfig = {
             apiKey: "AIzaSyA02jTz_G8275yid5bksA1MgbE6vqttvsA",
             authDomain: "publiclearning-6d2a3.firebaseapp.com",
@@ -28,12 +27,10 @@
 
         // Initialize Firebase
         const app = initializeApp(firebaseConfig);
-        // If you plan to use analytics, keep this line. Otherwise, it's optional.
-        const analytics = getAnalytics(app);
-        // Initialize Firestore
-        const db = getFirestore(app);
+        const analytics = getAnalytics(app); // Optional, keep if you plan to use analytics
+        const db = getFirestore(app); // Initialize Firestore
 
-        // Expose Firebase objects to the global window scope for script.js
+        // Expose Firebase objects and functions to the global window scope for script.js
         // This is necessary because script.js is a separate script and not a module itself.
         window.db = db;
         window.collection = collection;
@@ -41,8 +38,10 @@
         window.doc = doc;
         window.setDoc = setDoc;
         window.deleteDoc = deleteDoc;
-        // If you use analytics in script.js, you might expose it too:
-        // window.analytics = analytics;
+        window.query = query;
+        window.orderBy = orderBy;
+        window.serverTimestamp = serverTimestamp; // Expose serverTimestamp
+        // window.analytics = analytics; // Expose analytics if needed in script.js
     </script>
 </head>
 <body>
@@ -81,13 +80,7 @@
             <input type="date" id="note-date" aria-describedby="note-date-desc" />
             <small id="note-date-desc" class="sr-only">Pick the date for your note</small>
             <textarea id="note-content" placeholder="Write what you learned today..." rows="5" aria-label="Your daily learning notes"></textarea>
-            <button type="button" onclick="saveNote()">Save Note</button>
-
-            <div id="note-actions">
-                <button type="button" onclick="editNote()">Edit</button>
-                <button type="button" onclick="deleteNote()">Delete</button>
-            </div>
-            <p id="status" role="status" aria-live="polite"></p>
+            <button type="button" id="save-note-btn">Save Note</button> <p id="status" role="status" aria-live="polite"></p>
 
             <div id="all-notes-display">
                 <h3>Previous Notes</h3>
@@ -99,9 +92,9 @@
         <section id="images" aria-labelledby="images-heading">
             <h2 id="images-heading">Gallery</h2>
             <div class="image-gallery">
-                <img src="signUp.png" alt="Screenshot of Kosovo Travel Guide app - Sign Up" />
-                <img src="logIn.png" alt="Screenshot of Kosovo Travel Guide app - Log In" />
-                <img src="accommodation.png" alt="Screenshot of Kosovo Travel Guide app - Accommodation" />
+                <img src="img/signUp.png" alt="Screenshot of Kosovo Travel Guide app - Sign Up" />
+                <img src="img/logIn.png" alt="Screenshot of Kosovo Travel Guide app - Log In" />
+                <img src="img/accommodation.png" alt="Screenshot of Kosovo Travel Guide app - Accommodation" />
             </div>
         </section>
 
