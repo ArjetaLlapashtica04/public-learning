@@ -2,7 +2,12 @@
 const noteDateInput = document.getElementById('note-date');
 const noteContentInput = document.getElementById('note-content');
 const statusDiv = document.getElementById('status');
-const notesList = document.getElementById('notes-list'); // Changed from allNotesDiv
+const notesList = document.getElementById('notes-list');
+
+// --- Mobile Navigation Elements ---
+const hamburgerMenu = document.querySelector('.hamburger-menu');
+const mainNavList = document.getElementById('main-nav-list');
+
 
 // --- Functions for Saving Notes to Firestore ---
 async function saveNote() {
@@ -122,15 +127,6 @@ function editNote(id) {
     // 4. When "Update Note" is clicked, use window.setDoc to update the existing document.
     alert(`Edit note with ID: ${id}. (Feature not fully implemented yet)`);
     console.log("Attempting to edit note with ID:", id);
-    // Example: You might want to fetch the note, populate the form, and then re-save
-    // const noteRef = window.doc(window.db, "notes", id);
-    // window.getDoc(noteRef).then(docSnap => {
-    //     if (docSnap.exists()) {
-    //         noteDateInput.value = docSnap.data().date;
-    //         noteContentInput.value = docSnap.data().content;
-    //         // Maybe change save button text and add a flag for "editing mode"
-    //     }
-    // });
 }
 
 // --- Function to Delete Notes from Firestore ---
@@ -161,6 +157,25 @@ document.addEventListener('DOMContentLoaded', () => {
     } else {
         console.warn("Save button with ID 'save-note-btn' not found. Check index.html.");
     }
+
+    // Toggle mobile navigation menu
+    if (hamburgerMenu && mainNavList) {
+        hamburgerMenu.addEventListener('click', () => {
+            mainNavList.classList.toggle('active');
+            hamburgerMenu.classList.toggle('active'); // For optional hamburger icon animation
+        });
+
+        // Close menu when a nav link is clicked (optional, but good for UX)
+        mainNavList.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                mainNavList.classList.remove('active');
+                hamburgerMenu.classList.remove('active');
+            });
+        });
+    } else {
+        console.warn("Hamburger menu or main nav list not found. Check index.html.");
+    }
+
 
     // Call displayAllNotes when the page loads to show existing notes from Firestore
     displayAllNotes();
