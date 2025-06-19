@@ -67,7 +67,7 @@ async function displayAllNotes() {
             const noteId = doc.id; // Get the document ID (which is our date in this case)
 
             const listItem = document.createElement('li'); // Each note is a list item
-            
+
             // Create the header (the clickable date part)
             const noteHeader = document.createElement('div');
             noteHeader.classList.add('note-header');
@@ -79,12 +79,34 @@ async function displayAllNotes() {
             // Create the content body (the collapsible part)
             const noteContentBody = document.createElement('div');
             noteContentBody.classList.add('note-content-body');
-            noteContentBody.innerHTML = `
-                <div class="note-content-text">${note.content}</div>
-                <div class="note-item-actions">
-                    <button class="edit-note-btn" data-id="${noteId}">Edit</button>
-                    <button class="delete-note-btn" data-id="${noteId}">Delete</button>
-                </div>`;
+
+            // Create the div for the note text content
+            const noteContentTextDiv = document.createElement('div');
+            noteContentTextDiv.classList.add('note-content-text');
+            // *** CRITICAL CHANGE: Use textContent here to display raw text ***
+            noteContentTextDiv.textContent = note.content;
+            noteContentBody.appendChild(noteContentTextDiv);
+
+            // Create the actions div
+            const noteItemActionsDiv = document.createElement('div');
+            noteItemActionsDiv.classList.add('note-item-actions');
+
+            // Create Edit button
+            const editButton = document.createElement('button');
+            editButton.classList.add('edit-note-btn');
+            editButton.dataset.id = noteId;
+            editButton.textContent = 'Edit';
+            noteItemActionsDiv.appendChild(editButton);
+
+            // Create Delete button
+            const deleteButton = document.createElement('button');
+            deleteButton.classList.add('delete-note-btn');
+            deleteButton.dataset.id = noteId;
+            deleteButton.textContent = 'Delete';
+            noteItemActionsDiv.appendChild(deleteButton);
+
+            noteContentBody.appendChild(noteItemActionsDiv);
+
             listItem.appendChild(noteContentBody);
 
             notesList.appendChild(listItem);
@@ -135,7 +157,7 @@ async function deleteNote(idToDelete) {
         try {
             // Delete the document from the 'notes' collection based on its ID
             await window.deleteDoc(window.doc(window.db, "notes", idToDelete));
-            
+
             statusDiv.textContent = `Note for ${idToDelete} deleted successfully from the cloud!`;
             statusDiv.style.color = '#ff6347'; // Tomato color for delete confirmation
             displayAllNotes(); // Refresh the list
