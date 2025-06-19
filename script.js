@@ -52,8 +52,6 @@ async function displayAllNotes() {
     notesList.innerHTML = ''; // Clear previous notes
 
     try {
-        // Get all documents from the 'notes' collection, ordered by timestamp (or date)
-        // Using window.query and window.orderBy as they are exposed from index.html
         const notesQuery = window.query(window.collection(window.db, "notes"), window.orderBy("date", "desc"));
         const querySnapshot = await window.getDocs(notesQuery);
 
@@ -80,36 +78,43 @@ async function displayAllNotes() {
             const noteContentBody = document.createElement('div');
             noteContentBody.classList.add('note-content-body');
 
-            // Create the div for the note text content
+            // *** START OF CRITICAL FIX ***
+            // Create the div specifically for the note's text content
             const noteContentTextDiv = document.createElement('div');
             noteContentTextDiv.classList.add('note-content-text');
-            // *** CRITICAL CHANGE: Use textContent here to display raw text ***
+
+            // Set the note content using textContent to display it literally
+            // This is the key change to prevent HTML rendering
             noteContentTextDiv.textContent = note.content;
+
+            // Append the text content div to the note content body
             noteContentBody.appendChild(noteContentTextDiv);
 
-            // Create the actions div
+            // Create the actions div for buttons
             const noteItemActionsDiv = document.createElement('div');
             noteItemActionsDiv.classList.add('note-item-actions');
 
             // Create Edit button
             const editButton = document.createElement('button');
             editButton.classList.add('edit-note-btn');
-            editButton.dataset.id = noteId;
-            editButton.textContent = 'Edit';
+            editButton.dataset.id = noteId; // Set data-id attribute
+            editButton.textContent = 'Edit'; // Set button text
             noteItemActionsDiv.appendChild(editButton);
 
             // Create Delete button
             const deleteButton = document.createElement('button');
             deleteButton.classList.add('delete-note-btn');
-            deleteButton.dataset.id = noteId;
-            deleteButton.textContent = 'Delete';
+            deleteButton.dataset.id = noteId; // Set data-id attribute
+            deleteButton.textContent = 'Delete'; // Set button text
             noteItemActionsDiv.appendChild(deleteButton);
 
+            // Append the actions div to the note content body
             noteContentBody.appendChild(noteItemActionsDiv);
+            // *** END OF CRITICAL FIX ***
 
-            listItem.appendChild(noteContentBody);
+            listItem.appendChild(noteContentBody); // Append the complete content body to the list item
 
-            notesList.appendChild(listItem);
+            notesList.appendChild(listItem); // Append the list item to the main notes list
 
             // Add click listener to the header to toggle the content
             noteHeader.addEventListener('click', () => {
